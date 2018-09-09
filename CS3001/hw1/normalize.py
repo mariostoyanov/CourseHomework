@@ -7,11 +7,9 @@ def countOccurences(num_list):
     occurences = {}
 
     for i in num_list:
-        # Add key if the number hasn't been encountered yet. Set initial count to 1.
         if i not in list(occurences.keys()): 
             occurences[i] = 1
             continue
-        # Otherwise, increment that value by 1
         occurences[i] += 1
 
     return collections.OrderedDict(sorted(occurences.items()))
