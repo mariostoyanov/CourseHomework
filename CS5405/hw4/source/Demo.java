@@ -1,3 +1,9 @@
+/**
+	Mario Stoyanov
+	CS5405 - Java GUIs
+	Homework 4
+**/
+
 package code; 
 
 import java.io.File;
@@ -31,8 +37,7 @@ public class Demo extends Application{
     Scene scene;
     Stage stage;
 
-    public void start(Stage stage) {
-        //root.getChildren().addAll.(pane1, button1, b2, button3,)
+    public void start(Stage stage) throws Exception { 
         root = homePage();
         scene = new Scene(root,700,600,Color.GRAY);
         stage.setTitle("Homework 4");
@@ -42,17 +47,9 @@ public class Demo extends Application{
 
     Text t1,t2,t3,t4,t5,t6;
     Button b1, b2, b3, b4;
-    
-    int x1 = 200;
-    int y1 = 100; 
-    int r1 = 50;
-    int x2 = 225;
-    int y2 = 100;
-    int r2 = 20;
-    
     Circle c1, c2; 
 
-    public Pane homePage(){
+    public Pane homePage() throws Exception {
 
         t1 = new Text(10,90, "Author Text");
         t1.setText("Homework 4 \nAuthor: Mario Stoyanov \nEmail: msfp6@mst.edu");
@@ -83,6 +80,17 @@ public class Demo extends Application{
         t5.setFill(Color.CYAN);
         t5.setWrappingWidth(600);
         
+        File file = new File("data/inFile.txt");
+        Scanner scanner = new Scanner(file);
+
+        int x1 = scanner.nextInt();
+        int y1 = scanner.nextInt();
+        int r1 = scanner.nextInt();
+        int x2 = scanner.nextInt();
+        int y2 = scanner.nextInt();
+        int r2 = scanner.nextInt();
+        scanner.close();
+
         c1 = new Circle();
         c1.setCenterX(x1);
         c1.setCenterY(y1);
