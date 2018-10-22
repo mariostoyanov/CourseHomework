@@ -107,7 +107,7 @@ public class Demo extends Application{
         a1.setFill(Color.RED);
         a1.setType(ArcType.ROUND);
 
-        a2 = new Arc(150,150,125,125,50+ 90,30);
+        a2 = new Arc(150,150,125,125,50 + 90,30);
         a2.setFill(Color.RED);
         a2.setType(ArcType.ROUND);
 
