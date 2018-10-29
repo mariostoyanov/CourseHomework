@@ -1,3 +1,6 @@
+# ~~~~~~~~~ Mario Stoyanov ~~~~~~~~~~~
+# ~~~~~~~~~~~ Homework 4 ~~~~~~~~~~~~
+
 from sklearn import tree
 from sklearn.naive_bayes import GaussianNB
 
@@ -30,54 +33,54 @@ def Question1():
     
     testResults = gnb.fit(data, target).predict(testData)
     
-    accuracy_result = calculate_accuracy(actualResults, testResults)
-    precision_result = calculate_precision(actualResults, testResults)
-    recall_result = calculate_recall(actualResults, testResults)
+    accuracy = calculate_accuracy(actualResults, testResults)
+    precision = calculate_precision(actualResults, testResults)
+    recall = calculate_recall(actualResults, testResults)
 
     print(testResults)
     print(actualResults)
 
     print("~~~~~~~~~~ Naive Baysian ~~~~~~~~~~")
-    print(str(accuracy_result) + "% Accuracy")
-    print(str(precision_result) + "% Precision")
-    print(str(recall_result) + "% Recall")
-    print(str(2 * ((precision_result * recall_result) / (precision_result + recall_result))) + " f1 score")
+    print(str(accuracy) + "% Accuracy")
+    print(str(precision) + "% Precision")
+    print(str(recall) + "% Recall")
+    print(str(2 * ((precision * recall) / (precision + recall))) + " f1 score")
 
 
     model = tree.DecisionTreeClassifier(criterion='entropy')
     model.fit(data, target)
     testResults = model.predict(testData)
 
-    accuracy_result = calculate_accuracy(actualResults, testResults)
-    precision_result = calculate_precision(actualResults, testResults)
-    recall_result = calculate_recall(actualResults, testResults)
+    accuracy = calculate_accuracy(actualResults, testResults)
+    precision = calculate_precision(actualResults, testResults)
+    recall = calculate_recall(actualResults, testResults)
 
     print(testResults)
     print(actualResults)
 
     print("~~~~~~~~~~ ID3 Decision Tree ~~~~~~~~~~")
-    print(str(accuracy_result) + "% Accuracy")
-    print(str(precision_result) + "% Precision")
-    print(str(recall_result) + "% Recall")
-    print(str(2 * ((precision_result * recall_result) / (precision_result + recall_result))) + " f1 score")
+    print(str(accuracy) + "% Accuracy")
+    print(str(precision) + "% Precision")
+    print(str(recall) + "% Recall")
+    print(str(2 * ((precision * recall) / (precision + recall))) + " f1 score")
 
     model = tree.DecisionTreeClassifier()
     model.fit(data, target)
     testResults = model.predict(testData)
 
-    accuracy_result = calculate_accuracy(actualResults, testResults)
-    precision_result = calculate_precision(actualResults, testResults)
-    recall_result = calculate_recall(actualResults, testResults)
+    accuracy = calculate_accuracy(actualResults, testResults)
+    precision = calculate_precision(actualResults, testResults)
+    recall = calculate_recall(actualResults, testResults)
 
     print(testResults)
     print(actualResults)
 
     print("~~~~~~~~~~ Performance of CART Decision Tree ~~~~~~~~~~")
-    print(str(accuracy_result) + "% Accuracy")
-    print(str(precision_result) + "% Precision")
-    print(str(recall_result) + "% Recall")
-    print(str(2 * ((precision_result * recall_result) / (precision_result + recall_result))) + " f1 score")
-    
+    print(str(accuracy) + "% Accuracy")
+    print(str(precision) + "% Precision")
+    print(str(recall) + "% Recall")
+    print(str(2 * ((precision * recall) / (precision + recall))) + " f1 score")
+
     
 def calculate_accuracy(list_1, list_2):
     matches = 0
