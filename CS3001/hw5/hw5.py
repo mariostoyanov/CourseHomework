@@ -49,8 +49,8 @@ for i in range(5):
         if generatedResults[index] == row['class']:
             correct += 1
         index += 1
-    print("The number of correct values of decision tree model on iteration " + str(i) + " was: " + str(correct))
-    print("The accuracy of decision tree model on iteration " + str(i) + " was: " + str(100 * correct / len(generatedResults)) + "%")
+    print("The number of correct values of decision tree model on iteration " + str(i) + " is: " + str(correct))
+    print("The accuracy of decision tree model on iteration " + str(i) + " is: " + str(100 * correct / len(generatedResults)) + "% \n")
     decisionTreeAccuracy += 100 * correct / len(generatedResults)
 
     ##### kNN Classifier Trainer #####
@@ -69,12 +69,12 @@ for i in range(5):
         if generatedResults[index] == row['class']:
             correct += 1
         index += 1
-    print("The number of correct values for kNN on iteration " + str(i) + " was: " + str(correct))
-    print("The accuracy of kNN on iteration " + str(i) + " was: " + str(100 * correct / len(generatedResults)) + "%")
+    print("The number of correct values for kNN on iteration " + str(i) + " is: " + str(correct))
+    print("The accuracy of kNN on iteration " + str(i) + " is: " + str(100 * correct / len(generatedResults)) + "% \n")
     kNNAccuracy += 100 * correct / len(generatedResults)
 
 decisionTreeAccuracy /= 5
-print("The overall accuracy of the decision tree model was: " + str(decisionTreeAccuracy) + "%")
+print("~~~ The overall accuracy of the decision tree model was: " + str(decisionTreeAccuracy) + "% ~~~")
 
 kNNAccuracy /= 5
-print("The overall accuracy of the kNN classifier was: " + str(kNNAccuracy) + "%")
+print("~~~ The overall accuracy of the kNN classifier was: " + str(kNNAccuracy) + "% ~~~")
