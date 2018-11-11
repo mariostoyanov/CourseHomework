@@ -77,55 +77,16 @@ public class Demo extends Application{
         t4.setFill(Color.GREEN);
         t4.setWrappingWidth(600);       
 
-        //Begin fan creation
         c1 = new Circle();
-        c1.setCenterX(150);
-        c1.setCenterY(150);
-        c1.setRadius(150);
-        c1.setFill(new Color(0,0,0,0));
-        c1.setStroke(Color.FUCHSIA);
-        c1.setStrokeWidth(3);
-
-        c2 = new Circle();
-        c2.setCenterX(150);
-        c2.setCenterY(150);
-        c2.setRadius(100);
-        c2.setFill(Color.PINK);
-        c2.setStroke(Color.FUCHSIA);
-        c2.setStrokeWidth(3);
-
+        c2 = new Circle(); 
         c3 = new Circle();
-        c3.setCenterX(150);
-        c3.setCenterY(150);
-        c3.setRadius(50);
-        c3.setFill(Color.BLUE);
-        c3.setStroke(Color.FUCHSIA);
-        c3.setStrokeWidth(3);
-
-        a1 = new Arc(150,150,125,125,50,30);
-        a1.setFill(Color.RED);
-        a1.setType(ArcType.ROUND);
-
-        a2 = new Arc(150,150,125,125,50 + 90,30);
-        a2.setFill(Color.RED);
-        a2.setType(ArcType.ROUND);
-
-        a3 = new Arc(150,150,125,125,50 + 180,30);
-        a3.setFill(Color.RED);
-        a3.setType(ArcType.ROUND);
-
-        a4 = new Arc(150,150,125,125,50 + 270,30);
-        a4.setFill(Color.RED);
-        a4.setType(ArcType.ROUND);
-        //End fan creation
-
+        drawFan(10);
         //numFans.setMax(10);
         //speed.setMax(20);
 
-        pane1.getChildren().addAll(t1);        
+        pane1.getChildren().addAll(t1,b5);        
         pane2.getChildren().addAll(t2,t3);        
-        pane3.getChildren().addAll(t4);
-        pane5.getChildren().addAll(c1,c2,c3,a1,a2,a3,a4,speed);        
+        pane3.getChildren().addAll(t4);      
         pane4.getChildren().addAll(pane1);
 
         pane1.relocate(10,50);        
@@ -136,6 +97,8 @@ public class Demo extends Application{
         b2 = new Button("Description", new ImageView("images/description.jpg"));        
         b3 = new Button("Reference", new ImageView("images/reference.png")); 
         b4 = new Button("Demo", new ImageView("images/demo.jpg"));
+
+        b5 = new Button("help");
         //b5 = new Button("Start", new ImageView("images/start.png"));
         //b6 = new Button("Stop", new ImageView("images/stop.jpg"));    
         b1.relocate(0,20);        
@@ -152,6 +115,40 @@ public class Demo extends Application{
         b4.setOnAction(ae->{pane4.getChildren().clear();pane4.getChildren().add(pane5);});        
         
         return root; 
+    }
+
+    public void drawFan(int numberFanBlades){
+
+        c1.setCenterX(150);
+        c1.setCenterY(150);
+        c1.setRadius(150);
+        c1.setFill(new Color(0,0,0,0));
+        c1.setStroke(Color.FUCHSIA);
+        c1.setStrokeWidth(3);
+
+        c2.setCenterX(150);
+        c2.setCenterY(150);
+        c2.setRadius(100);
+        c2.setFill(Color.PINK);
+        c2.setStroke(Color.FUCHSIA);
+        c2.setStrokeWidth(3);
+
+        c3.setCenterX(150);
+        c3.setCenterY(150);
+        c3.setRadius(50);
+        c3.setFill(Color.BLUE);
+        c3.setStroke(Color.FUCHSIA);
+        c3.setStrokeWidth(3);
+
+        pane5.getChildren().addAll(c1,c2,c3);  
+
+        for(int i = 0; i < numberFanBlades; i++){
+            int bladeLocation = (360/numberFanBlades) * i;
+            Arc arc = new Arc(150, 150, 125, 125, bladeLocation, 30);
+            arc.setFill(Color.RED);
+            arc.setType(ArcType.ROUND);
+            pane5.getChildren().add(arc);
+        }
     }
 
     public static void main(String[] args){
