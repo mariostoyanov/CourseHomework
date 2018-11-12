@@ -31,6 +31,8 @@ import javafx.animation.ScaleTransition;
 import javafx.util.Duration;
 import javafx.geometry.Point3D;
 import javafx.geometry.Pos;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 
 public class Demo extends Application{
     Pane pane1 = new Pane();
@@ -51,6 +53,8 @@ public class Demo extends Application{
     int numberFanBlades, speedOfFan;
     int direction = 360;
     boolean pause = true;
+
+    ImageView authorImage; 
 
     Slider numFans, speed;
     
@@ -81,6 +85,11 @@ public class Demo extends Application{
         t1.setFill(Color.BLUE);
         t1.setWrappingWidth(600);
         t1.setTextAlignment(TextAlignment.CENTER);
+
+        authorImage = new ImageView("images/mario.jpg");
+        authorImage.setFitHeight(250);
+        authorImage.setFitWidth(200);
+        authorImage.relocate(210,210);
 
         t2 = new Text(0, 20, "Description Text");
         t2.setFont(new Font(20));
@@ -192,7 +201,7 @@ public class Demo extends Application{
         b7.relocate(300,350);
         b8.relocate(450,350);
 
-        pane1.getChildren().addAll(t1);        
+        pane1.getChildren().addAll(t1,authorImage);        
         pane2.getChildren().addAll(t2,t3);        
         pane3.getChildren().addAll(t4);
         pane5.getChildren().addAll(c1,c2,c3,pane6,b5,b6,b7,b8,nft,numFans,nst,speed);        
