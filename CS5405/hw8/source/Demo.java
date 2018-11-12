@@ -76,7 +76,7 @@ public class Demo extends Application{
         b8 = new Button("Reverse", new ImageView("images/reverse.png"));    
 
         t1 = new Text(10,90, "Author Text");
-        t1.setText("Homework 8 \nAuthor: Mario Stoyanov \nEmail: msfp6@mst.edu");
+        t1.setText("Homework 8 \nAuthor: Mario Stoyanov \nEmail: msfp6@mst.edu \nPhone: 314-814-7234\nI own all the material in this GUI under copyright");
         t1.setFont(new Font(20));
         t1.setFill(Color.BLUE);
         t1.setWrappingWidth(600);
@@ -92,9 +92,9 @@ public class Demo extends Application{
         t3.setFont(new Font(15));
         t3.setFill(Color.RED); 
         t3.setWrappingWidth(600);
-        t3.setText("The Author button should have the author name and email. \nThe Description button should contain problem description \nThe Reference button should list any references used \nThe Demo button should provide a demo of the fan");        
+        t3.setText("The Author button should have the author name and email. \nThe Description button should contain problem description \nThe Reference button should list any references used \nThe Demo button should provide a demo of the fan\nThe fan should have start, stop, pause, and reverse buttons for the animation\nThere should be a slider to control the number of blades\nThere should be a slider to control the fan speed");        
         
-        t4 = new Text(0, 20, "I did not use any reference");
+        t4 = new Text(0, 20, "I used the lecture handouts and JavaFX documentation for reference.");
         t4.setFont(new Font(20));
         t4.setFill(Color.GREEN);
         t4.setWrappingWidth(600);       
