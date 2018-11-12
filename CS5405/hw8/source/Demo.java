@@ -1,7 +1,7 @@
 /**
 	Mario Stoyanov
 	CS5405 - Java GUIs
-	Homework 6
+	Homework 8
 **/
 
 package code; 
@@ -24,6 +24,13 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.control.Slider;
+import javafx.geometry.Orientation;
+import javafx.animation.Animation;
+import javafx.animation.RotateTransition;
+import javafx.animation.ScaleTransition;
+import javafx.util.Duration;
+import javafx.geometry.Point3D;
+import javafx.geometry.Pos;
 
 public class Demo extends Application{
     Pane pane1 = new Pane();
@@ -31,17 +38,23 @@ public class Demo extends Application{
     Pane pane3 = new Pane();
     Pane pane4 = new Pane();
     Pane pane5 = new Pane();
+    Pane pane6 = new Pane();
     Pane root = new Pane();
 
     Scene scene;
     Stage stage;
     
-    Text t1,t2,t3,t4;
-    Button b1,b2,b3,b4,b5,b6;
-    Circle c1,c2,c3,c4;
+    Text t1,t2,t3,t4,nft,nst;
+    Button b1,b2,b3,b4,b5,b6,b7,b8;
+    Circle c1,c2,c3;
     Arc a1,a2,a3,a4;
+    int numberFanBlades, speedOfFan;
+    int direction = 360;
+    boolean pause = true;
 
     Slider numFans, speed;
+    
+    RotateTransition fanRotation;
 
     public void start(Stage stage) throws Exception { 
         root = homePage();
@@ -52,6 +65,15 @@ public class Demo extends Application{
     }
 
     public Pane homePage() throws Exception {
+
+        b1 = new Button("Author", new ImageView("images/author.png"));        
+        b2 = new Button("Description", new ImageView("images/description.jpg"));        
+        b3 = new Button("Reference", new ImageView("images/reference.png")); 
+        b4 = new Button("Demo", new ImageView("images/demo.jpg"));
+        b5 = new Button("Start", new ImageView("images/start.png"));
+        b6 = new Button("Stop", new ImageView("images/stop.jpg"));
+        b7 = new Button("Pause", new ImageView("images/pause.png"));
+        b8 = new Button("Reverse", new ImageView("images/reverse.png"));    
 
         t1 = new Text(10,90, "Author Text");
         t1.setText("Homework 8 \nAuthor: Mario Stoyanov \nEmail: msfp6@mst.edu");
@@ -80,33 +102,101 @@ public class Demo extends Application{
         c1 = new Circle();
         c2 = new Circle(); 
         c3 = new Circle();
-        drawFan(10);
-        //numFans.setMax(10);
-        //speed.setMax(20);
+        drawFan(0);
 
-        pane1.getChildren().addAll(t1,b5);        
-        pane2.getChildren().addAll(t2,t3);        
-        pane3.getChildren().addAll(t4);      
-        pane4.getChildren().addAll(pane1);
+        //DEFAULT ANIMATION VALUES 
+        fanRotation = new RotateTransition(Duration.seconds(10), pane6);
+        fanRotation.setByAngle(direction);
+        fanRotation.setCycleCount(Animation.INDEFINITE);
 
+        //SLIDER FOR NUMBER OF BLADES
+        nft = new Text(350, 60, "Number of fan blades: ");
+        nft.setFont(new Font(15));
+        nft.setFill(Color.BLUE);
+        numFans = new Slider(3,10,0);
+        numFans.setMajorTickUnit(1);
+        numFans.setMinorTickCount(0);
+        numFans.setOrientation(Orientation.HORIZONTAL);
+        numFans.setSnapToTicks(true);
+        numFans.setShowTickLabels(true);
+        numFans.setShowTickMarks(true);
+        numFans.relocate(550,50);
+        numFans.setScaleX(1.5);
+        numFans.setScaleY(1.5);
+
+        numFans.valueProperty().addListener(nfb->{
+            pane6.getChildren().clear();
+            numberFanBlades = (int) numFans.getValue();
+            drawFan(numberFanBlades);
+        });
+
+        //SLIDER FOR ROTATION SPEED
+        nst = new Text (350, 120, "Speed of fan: ");
+        nst.setFont(new Font(15));
+        nst.setFill(Color.BLUE);
+        speed = new Slider(1,10,0);
+        speed.setMajorTickUnit(1);
+        speed.setMinorTickCount(0);
+        speed.setOrientation(Orientation.HORIZONTAL);
+        speed.setSnapToTicks(true);
+        speed.setShowTickLabels(true);
+        speed.setShowTickMarks(true);
+        speed.relocate(550,120);
+        speed.setScaleX(1.5);
+        speed.setScaleY(1.5);
+
+        speed.valueProperty().addListener(ss->{
+            speedOfFan = (int) speed.getValue();
+            fanRotation.setRate(speedOfFan);
+        });
+
+        //ANIMATION BUTTONS
+        b5.setOnAction(ae->{
+            fanRotation.play();
+        });
+        
+        b6.setOnAction(ae->{
+            fanRotation.stop();
+        });
+
+        b7.setOnAction(ae->{
+            pause = !pause;
+            if(pause){
+                fanRotation.play();
+            }
+            else{
+                fanRotation.pause();
+            }
+        });
+
+        b8.setOnAction(ae->{
+            fanRotation.stop();
+            direction = direction * -1; 
+            fanRotation.setByAngle(direction);
+            fanRotation.play();
+        });
+
+        //PANE ORGANIZATION
         pane1.relocate(10,50);        
         pane2.relocate(10,50);        
         pane3.relocate(10,50);        
-        pane4.relocate(10,100);        
-        b1 = new Button("Author", new ImageView("images/author.png"));        
-        b2 = new Button("Description", new ImageView("images/description.jpg"));        
-        b3 = new Button("Reference", new ImageView("images/reference.png")); 
-        b4 = new Button("Demo", new ImageView("images/demo.jpg"));
-
-        b5 = new Button("help");
-        //b5 = new Button("Start", new ImageView("images/start.png"));
-        //b6 = new Button("Stop", new ImageView("images/stop.jpg"));    
+        pane4.relocate(10,100);
+        pane6.relocate(25,25);        
+        
         b1.relocate(0,20);        
         b2.relocate(170,20);        
         b3.relocate(365,20);
         b4.relocate(550,20);
-        //b5.relocate(0,350);
-        //b6.relocate(100,50);
+        b5.relocate(0,350);
+        b6.relocate(150,350);
+        b7.relocate(300,350);
+        b8.relocate(450,350);
+
+        pane1.getChildren().addAll(t1);        
+        pane2.getChildren().addAll(t2,t3);        
+        pane3.getChildren().addAll(t4);
+        pane5.getChildren().addAll(c1,c2,c3,pane6,b5,b6,b7,b8,nft,numFans,nst,speed);        
+        pane4.getChildren().addAll(pane1);
 
         root.getChildren().addAll(b1, b2, b3, b4, pane4);        
         b1.setOnAction(ae->{pane4.getChildren().clear();pane4.getChildren().add(pane1);});        
@@ -140,14 +230,12 @@ public class Demo extends Application{
         c3.setStroke(Color.FUCHSIA);
         c3.setStrokeWidth(3);
 
-        pane5.getChildren().addAll(c1,c2,c3);  
-
         for(int i = 0; i < numberFanBlades; i++){
             int bladeLocation = (360/numberFanBlades) * i;
-            Arc arc = new Arc(150, 150, 125, 125, bladeLocation, 30);
+            Arc arc = new Arc(125, 125, 125, 125, bladeLocation, 30); //125
             arc.setFill(Color.RED);
             arc.setType(ArcType.ROUND);
-            pane5.getChildren().add(arc);
+            pane6.getChildren().add(arc);
         }
     }
 
