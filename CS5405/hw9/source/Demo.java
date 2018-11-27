@@ -1,7 +1,7 @@
 /**
 	Mario Stoyanov
 	CS5405 - Java GUIs
-	Homework 8
+	Homework 9
 **/
 
 package code; 
@@ -68,7 +68,7 @@ public class Demo extends Application{
 
     public void start(Stage stage) throws Exception { 
         root = homePage();
-        scene = new Scene(root,900,900,Color.GRAY);
+        scene = new Scene(root,1000,900,Color.GRAY);
         stage.setTitle("Homework 9");
         stage.setScene(scene);
         stage.show();
