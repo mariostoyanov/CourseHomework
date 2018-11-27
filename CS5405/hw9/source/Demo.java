@@ -110,20 +110,28 @@ public class Demo extends Application{
 
         vlv = new ListView<> (FXCollections.observableArrayList(videoTitles));
         vlv.setPrefSize(150,200);
-        vlv.relocate(600,80);
+        vlv.relocate(610,80);
+
+        m2 = new Media(v1.toURI().toString());
+        mp2 = new MediaPlayer(m2);
+        mv2 = new MediaView(mp2);
+        mv2.setFitWidth(600);
+        mv2.setFitHeight(600);
+        pane6.getChildren().addAll(mv2);
 
         vlv.getSelectionModel().selectedItemProperty().addListener(ov ->{
             for (Integer i:
                     vlv.getSelectionModel().getSelectedIndices()){
+                        mp2.stop();
+                        pane6.getChildren().remove(mv2);
                         m2 = new Media(videoList[i].toURI().toString());
                         mp2 = new MediaPlayer(m2);
+                        mv2 = new MediaView(mp2);
+                        mv2.setFitWidth(600);
+                        mv2.setFitHeight(600);
+                        pane6.getChildren().add(mv2);
                     }
         });
-        
-        mv2 = new MediaView(mp2);
-        mv2.setFitWidth(300);
-        mv2.setFitHeight(300);
-        //mv2.relocate(500,500);
 
         b1 = new Button("Author", new ImageView("images/author.png"));        
         b2 = new Button("Description", new ImageView("images/description.jpg"));        
@@ -239,7 +247,7 @@ public class Demo extends Application{
         pane2.getChildren().addAll(t2,t3);        
         pane3.getChildren().addAll(t4);
         pane5.getChildren().addAll(b5,b6,b7,b8,mv1,alv);
-        pane6.getChildren().addAll(b10,b11,b12,b13,mv2,vlv);       
+        pane6.getChildren().addAll(b10,b11,b12,b13,vlv);       
         pane4.getChildren().addAll(pane1);
 
         root.getChildren().addAll(b1, b2, b3, b4, b9, pane4);        
